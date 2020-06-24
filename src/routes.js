@@ -3,6 +3,7 @@ const router = express.Router()
 require('dotenv').config()
 const passport = require('passport')
 const db = require('./database')
+const moment = require('moment')
 
 const con = db.getCon()
 
@@ -54,7 +55,7 @@ router.get('/category', (req, res) => {
 
 router.post('/submit_goal', (req, res) => {
   checkLoggedIn(req, res)
-  const date = new Date(Date.parse(req.body.dueDate)).toISOString().slice(0, 10)+" "+ new Date().toLocaleTimeString('en-GB')
+  const date = moment(req.body.dueDate).format('YYYY-MM-DD  HH:mm:ss.000')
   queryString = 'INSERT INTO goals (goal, category, due_date) VALUES (?, ?, ?)'
   con.query(queryString, [req.body.goal, req.body.category, date], (err, results, field) => {
     if (err) {
