@@ -14,5 +14,6 @@ CREATE TABLE `simple_goals`.`goals` (
   `goal` MEDIUMTEXT NULL,
   `category` VARCHAR(100) NULL,
   `due_date` TIMESTAMP NULL,
+  `complete` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`goal_id`));
 
