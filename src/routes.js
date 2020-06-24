@@ -47,6 +47,18 @@ router.get('/goals', (req, res) => {
   })
 })
 
+router.get('/week', (req, res) => {
+  checkLoggedIn(req, res)
+  const queryString = 'SELECT * FROM goals WHERE complete = 0 AND YEARWEEK(`date`, 1) = YEARWEEK(CURDATE(), 1)'
+  con.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for /get_goals: ' + err)
+      return []
+    }
+    console.log('Getting data from database for /get_goals')
+    res.render('./pages/goals', { goals: rows })
+  })
+})
 router.get('/category', (req, res) => {
   checkLoggedIn(req, res)
   res.render('./pages/category')
