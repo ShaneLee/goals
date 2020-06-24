@@ -4,6 +4,8 @@ require('dotenv').config()
 const passport = require('passport')
 const db = require('./database')
 
+const con = db.getCon()
+
 const checkLoggedIn = (req, res) => {
   if (!req.isAuthenticated()) {
     res.redirect('/login')
