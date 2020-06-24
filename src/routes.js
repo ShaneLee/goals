@@ -33,7 +33,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/goals', (req, res) => {
   checkLoggedIn(req, res)
-  res.render('./pages/goals', { goals: db.goals() })
+  res.render('./pages/goals', { goals: db.getGoals() })
 })
 
 router.get('/category', (req, res) => {
