@@ -35,7 +35,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/goals', (req, res) => {
   checkLoggedIn(req, res)
-  const queryString = 'SELECT * FROM goals'
+  const queryString = 'SELECT * FROM goals WHERE complete = 0'
   con.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log('Failed to query for /get_goals: ' + err)
