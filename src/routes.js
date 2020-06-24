@@ -64,6 +64,54 @@ router.get('/category', (req, res) => {
   res.render('./pages/category')
 })
 
+router.get('/completed_week', (req, res) => {
+  checkLoggedIn(req, res)
+  const queryString = 'SELECT * FROM goals WHERE complete = 1 AND YEARWEEK(DATE(due_date), 1) = YEARWEEK(CURDATE(), 1)'
+  con.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for /get_goals: ' + err)
+      return []
+    }
+    console.log('Getting data from database for /get_goals')
+    res.render('./pages/goals', { goals: rows })
+  })
+})
+
+router.get('/month', (req, res) => {
+  checkLoggedIn(req, res)
+  const queryString = 'SELECT * FROM goals WHERE complete = 0 AND MONTH(DATE(due_date)) = MONTH(CURDATE())'
+  con.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for /get_goals: ' + err)
+      return []
+    }
+    console.log('Getting data from database for /get_goals')
+    res.render('./pages/goals', { goals: rows })
+  })
+})
+router.get('/category', (req, res) => {
+  checkLoggedIn(req, res)
+  res.render('./pages/category')
+})
+
+router.get('/completed_month', (req, res) => {
+  checkLoggedIn(req, res)
+  const queryString = 'SELECT * FROM goals WHERE complete = 1 AND MONTH(DATE(due_date)) = MONTH(CURDATE())'
+  con.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log('Failed to query for /get_goals: ' + err)
+      return []
+    }
+    console.log('Getting data from database for /get_goals')
+    res.render('./pages/goals', { goals: rows })
+  })
+})
+
+
+router.get('/category', (req, res) => {
+  checkLoggedIn(req, res)
+  res.render('./pages/category')
+})
 
 router.post('/submit_goal', (req, res) => {
   checkLoggedIn(req, res)
