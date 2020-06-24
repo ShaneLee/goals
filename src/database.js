@@ -15,16 +15,8 @@ const con = getDBConnection('simple_goals')
 
 const db = module.exports = {}
 
-db.getGoals = () => {
-  const queryString = 'SELECT * FROM goals'
-  con.query(queryString, (err, rows, fields) => {
-    if (err) {
-      console.log('Failed to query for /get_goals: ' + err)
-      return []
-    }
-    console.log('Getting data from database for /get_goals')
-    return rows
-  })
+db.getCon() = () => {
+  return con
 }
 
 db.getCategories = () => {
@@ -35,31 +27,6 @@ db.getCategories = () => {
     }
     console.log('Getting data from database for /')
     return rows
-  })
-}
-
-db.submitGoal = (goal, category, dueDate) => {
-  const date = new Date(Date.parse(dueDate)).toISOString().slice(0, 19).replace('T', ' ')
-  queryString = 'INSERT INTO goals (goal, category, due_date) VALUES (?, ?, ?)'
-  con.query(queryString, [goal, category, dueDate], (err, results, field) => {
-    if (err) {
-      console.log('Failed to submit goal. ' + err)
-      return
-    }
-    const result ='Logged new goal ' + results
-    console.log(result)
-    return result
-  })
-}
-
-db.submitCategory = (category) => {
-  queryString = 'INSERT INTO categories (category) VALUES (?)'
-  con.query(queryString, [category], (err, results, field) => {
-    if (err) {
-      console.log('Failed to submit category. ' + err)
-      return
-    }
-    console.log('Logged new category ' + results)
   })
 }
 
