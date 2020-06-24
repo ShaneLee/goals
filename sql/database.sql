@@ -1,17 +1,18 @@
-CREATE DATABASE  IF NOT EXISTS `goal_bucket`;
-USE `goal_bucket`;
+CREATE SCHEMA `simple_goals` ;
 
-CREATE TABLE `categories` (
-  `category` varchar(45) NOT NULL,
-  PRIMARY KEY (`category`)
-)
 
-CREATE TABLE `goals` (
-  `goals_id` int(11) NOT NULL AUTO_INCREMENT,
-  `time_submitted` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `goal` mediumtext NOT NULL,
-  `category` varchar(45) DEFAULT NULL,
-  `due_date` timestamp NULL,
-  PRIMARY KEY (`goals_id`)
-) ;
+CREATE DATABASE  IF NOT EXISTS `simple_goals`;
+USE `simple_goals`;
+
+CREATE TABLE `simple_goals`.`categories` (
+  `category` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`category`));
+
+CREATE TABLE `simple_goals`.`goals` (
+  `goal_id` INT NOT NULL AUTO_INCREMENT,
+  `time_submitted` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `goal` MEDIUMTEXT NULL,
+  `category` VARCHAR(100) NULL,
+  `due_date` TIMESTAMP NULL,
+  PRIMARY KEY (`goal_id`));
 
