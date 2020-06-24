@@ -55,7 +55,7 @@ router.get('/category', (req, res) => {
 
 router.post('/submit_goal', (req, res) => {
   checkLoggedIn(req, res)
-  const date = moment(req.body.dueDate).format('YYYY-MM-DD  HH:mm:ss.000')
+  const date = moment(req.body.dueDate, 'DD/MM/YYYY').format('YYYY-MM-DD  HH:mm:ss.000')
   queryString = 'INSERT INTO goals (goal, category, due_date) VALUES (?, ?, ?)'
   con.query(queryString, [req.body.goal, req.body.category, date], (err, results, field) => {
     if (err) {
