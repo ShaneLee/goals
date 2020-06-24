@@ -11,7 +11,7 @@ const getDBConnection = (database) => {
   })
 }
 
-const con = getDBConnection('goals')
+const con = getDBConnection('simple_goals')
 
 const db = module.exports = {}
 
