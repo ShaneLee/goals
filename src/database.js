@@ -41,3 +41,15 @@ db.deleteGoal = (id) => {
   })
   
 }
+
+db.completeGoal = (id) => {
+  queryString = 'UPDATE goals set complete = 1 WHERE goal_id = ?'
+  con.query(queryString, [id], (err, results, field) => {
+    if (err) {
+      console.log('Failed to complete goal ' + err)
+      return
+    }
+    console.log('Completed goal' + results)
+  })
+  
+}

@@ -13,6 +13,14 @@
         <td><%= goal.time_submitted %></td>
         <td><%= goal.category %></td>
         <td><%= goal.dueDate %></td>
+        <td><%= goal.goal %></td>
+        <td>
+        <form method="POST" action="/complete/<%= goal.goal_id %>">
+          <button>
+            ✅
+          </button>
+        </form>
+        </td>
         <td>
         <form method="POST" action="/delete/<%= goal.goal_id %>">
           <button>
@@ -20,7 +28,6 @@
           </button>
         </form>
         </td>
-        <td><%= goal.goal %></td>
       </tr>
       <% }) %>
     </tbody>

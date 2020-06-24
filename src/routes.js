@@ -82,11 +82,16 @@ router.post('/submit_category', (req, res) => {
   res.redirect('/')
 })
 
+router.post('/complete/:goal_id', (req, res) => {
+  checkLoggedIn(req, res)
+  db.completeGoal(req.params.goal_id)
+  res.redirect('/goals')
+})
+
 router.post('/delete/:goal_id', (req, res) => {
   checkLoggedIn(req, res)
   db.deleteGoal(req.params.goal_id)
   res.redirect('/goals')
-
 })
 
 module.exports = router
