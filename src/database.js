@@ -40,7 +40,7 @@ db.getCategories = () => {
 
 db.submitGoal = (goal, category, dueDate) => {
   const date = new Date(Date.parse(dueDate)).toISOString().slice(0, 19).replace('T', ' ')
-  queryString = 'INSERT INTO goals (goal, category, dueDate) VALUES (?, ?, ?)'
+  queryString = 'INSERT INTO goals (goal, category, due_date) VALUES (?, ?, ?)'
   con.query(queryString, [goal, category, dueDate], (err, results, field) => {
     if (err) {
       console.log('Failed to submit goal. ' + err)
