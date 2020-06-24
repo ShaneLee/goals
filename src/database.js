@@ -39,7 +39,7 @@ db.getCategories = () => {
 }
 
 db.submitGoal = (goal, category, dueDate) => {
-  const date = Date.parse(dueDate).toISOString().slice(0, 19).replace('T', ' ')
+  const date = new Date(Date.parse(dueDate).toISOString().slice(0, 19).replace('T', ' '))
   queryString = 'INSERT INTO goals (goal, category, dueDate) VALUES (?, ?, ?)'
   con.query(queryString, [goal, category, dueDate], (err, results, field) => {
     if (err) {
