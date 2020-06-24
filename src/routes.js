@@ -54,7 +54,7 @@ router.get('/category', (req, res) => {
 
 router.post('/submit_goal', (req, res) => {
   checkLoggedIn(req, res)
-  const date = new Date(Date.parse(req.body.dueDate)).toISOString().slice(0, 19).replace('T', ' ')
+  const date = new Date(Date.parse(req.body.dueDate)).toISOString().slice(0, 10)+" "+ new Date().toLocaleTimeString('en-GB')
   queryString = 'INSERT INTO goals (goal, category, due_date) VALUES (?, ?, ?)'
   con.query(queryString, [req.body.goal, req.body.category, date], (err, results, field) => {
     if (err) {
