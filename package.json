@@ -1,0 +1,26 @@
+{
+  "name": "Simple Goals",
+  "version": "1.1.0",
+  "description": "A goal tracker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shane Lee",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^7.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-layout": "^0.1.0",
+    "express-session": "^1.17.1",
+    "fs": "0.0.1-security",
+    "mysql": "^2.17.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "router": "^1.3.3",
+    "session-file-store": "^1.4.0",
+    "uniqid": "^5.2.0",
+  }
+}
