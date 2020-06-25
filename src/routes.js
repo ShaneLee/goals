@@ -155,4 +155,10 @@ router.post('/delete/:goal_id', (req, res) => {
   res.redirect('/goals')
 })
 
+router.get('/delete_all/:period', (req, res) => {
+  checkLoggedIn(req, res)
+  db.deleteGoalsInPeriod(req.params.period)
+  res.redirect('/goals')
+})
+
 module.exports = router

@@ -13,6 +13,20 @@ const getDBConnection = (database) => {
 
 const con = getDBConnection('simple_goals')
 
+const deletePeriodQuery = (period) => {
+  period = period.toLowerCase()
+  const del = 'DELETE from goals '
+
+  switch (period) {
+    case 'week':
+      return del + 'WHERE complete = 0 AND YEARWEEK(DATE(due_date), 1) = YEARWEEK(CURDATE(), 1)'
+    case 'month':
+      return del + 'WHERE complete = 0 AND MONTH(DATE(due_date)) = MONTH(CURDATE())'
+  }
+
+}
+
+
 const db = module.exports = {}
 
 db.getCon = () => {
@@ -33,6 +47,18 @@ db.getCategories = () => {
 db.deleteGoal = (id) => {
   queryString = 'DELETE from goals WHERE goal_id = ?'
   con.query(queryString, [id], (err, results, field) => {
+    if (err) {
+      console.log('Failed to delete goal ' + err)
+      return
+    }
+    console.log('Deleted goal' + results)
+  })
+  
+}
+
+db.deleteGoalsInPeriod = (period) => {
+  const queryString = deletePeriodQuery(period) 
+  con.query(queryString, (err, results, field) => {
     if (err) {
       console.log('Failed to delete goal ' + err)
       return
