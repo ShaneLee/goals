@@ -15,7 +15,7 @@ const con = getDBConnection('simple_goals')
 
 const deletePeriodQuery = (period) => {
   period = period.toLowerCase()
-  const del = 'DELETE from GOALS '
+  const del = 'DELETE from goals '
 
   switch (period) {
     case 'week':
