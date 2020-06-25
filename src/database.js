@@ -19,9 +19,9 @@ const deletePeriodQuery = (period) => {
 
   switch (period) {
     case 'week':
-      return del + 'WHERE complete = 1 AND YEARWEEK(DATE(due_date), 1) = YEARWEEK(CURDATE(), 1)'
+      return del + 'WHERE complete = 0 AND YEARWEEK(DATE(due_date), 1) = YEARWEEK(CURDATE(), 1)'
     case 'month':
-      return del + 'WHERE complete = 1 AND MONTH(DATE(due_date)) = MONTH(CURDATE())'
+      return del + 'WHERE complete = 0 AND MONTH(DATE(due_date)) = MONTH(CURDATE())'
   }
 
 }
