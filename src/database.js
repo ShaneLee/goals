@@ -70,7 +70,7 @@ db.deleteGoalsInPeriod = (period) => {
 }
 
 db.completeGoal = (id) => {
-  queryString = 'UPDATE goals set complete = 1, completed_date = ? WHERE goal_id = ?'
+  queryString = 'UPDATE goals set complete = 1, time_completed = ? WHERE goal_id = ?'
   con.query(queryString, [moment().format("YYYY-MM-DD HH:mm:ss"), id], (err, results, field) => {
     if (err) {
       console.log('Failed to complete goal ' + err)
