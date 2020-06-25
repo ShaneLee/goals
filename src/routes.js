@@ -113,6 +113,9 @@ router.get('/category', (req, res) => {
   res.render('./pages/category')
 })
 
+router.get('/test', (req, res) => {
+})
+
 router.post('/submit_goal', (req, res) => {
   checkLoggedIn(req, res)
   const date = moment(req.body.dueDate, 'DD/MM/YYYY').format('YYYY-MM-DD  HH:mm:ss.000')
