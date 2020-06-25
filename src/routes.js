@@ -66,7 +66,7 @@ router.get('/category', (req, res) => {
 
 router.get('/completed_week', (req, res) => {
   checkLoggedIn(req, res)
-  const queryString = 'SELECT * FROM goals WHERE complete = 1 AND YEARWEEK(DATE(due_date), 1) = YEARWEEK(CURDATE(), 1)'
+  const queryString = 'SELECT * FROM goals WHERE complete = 1 AND YEARWEEK(DATE(time_completed), 1) = YEARWEEK(CURDATE(), 1)'
   con.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log('Failed to query for /get_goals: ' + err)
@@ -96,7 +96,7 @@ router.get('/category', (req, res) => {
 
 router.get('/completed_month', (req, res) => {
   checkLoggedIn(req, res)
-  const queryString = 'SELECT * FROM goals WHERE complete = 1 AND MONTH(DATE(due_date)) = MONTH(CURDATE())'
+  const queryString = 'SELECT * FROM goals WHERE complete = 1 AND MONTH(DATE(time_completed)) = MONTH(CURDATE())'
   con.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log('Failed to query for /get_goals: ' + err)
@@ -111,6 +111,9 @@ router.get('/completed_month', (req, res) => {
 router.get('/category', (req, res) => {
   checkLoggedIn(req, res)
   res.render('./pages/category')
+})
+
+router.get('/test', (req, res) => {
 })
 
 router.post('/submit_goal', (req, res) => {

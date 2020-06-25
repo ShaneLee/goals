@@ -1,4 +1,5 @@
 const mysql = require('mysql')
+const moment = require('moment')
 require('dotenv').config()
 
 const getDBConnection = (database) => {
@@ -69,8 +70,8 @@ db.deleteGoalsInPeriod = (period) => {
 }
 
 db.completeGoal = (id) => {
-  queryString = 'UPDATE goals set complete = 1 WHERE goal_id = ?'
-  con.query(queryString, [id], (err, results, field) => {
+  queryString = 'UPDATE goals set complete = 1, time_completed = ? WHERE goal_id = ?'
+  con.query(queryString, [moment().format("YYYY-MM-DD HH:mm:ss"), id], (err, results, field) => {
     if (err) {
       console.log('Failed to complete goal ' + err)
       return
