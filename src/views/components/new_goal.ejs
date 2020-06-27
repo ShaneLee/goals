@@ -12,6 +12,9 @@
   <div class="form-label-group">
     <input type="text" class="form-control" name="dueDate" placeholder="Due Date" id="datepicker"/>
   </div>
+  <div class="form-label-group">
+    <input type="text" class="form-control" name="tags" placeholder="Tags (comma separated)" id="tags"/>
+  </div>
   <datalist id="category_list">
 	<% if (categories) { %>
 		<% categories.forEach((category) => {%>
