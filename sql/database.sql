@@ -16,5 +16,21 @@ CREATE TABLE `simple_goals`.`goals` (
   `due_date` TIMESTAMP NULL,
   `complete` TINYINT NULL DEFAULT 0,
   `time_completed` TIMESTAMP NULL,
+  `tag_id` INT NULL,
   PRIMARY KEY (`goal_id`));
 
+
+CREATE TABLE `simple_goals`.`tags` (
+    `tag_id` INT NOT NULL AUTO_INCREMENT,
+      `tag` VARCHAR(100) NULL,
+        PRIMARY KEY (`tag_id`));
+
+ALTER TABLE `simple_goals`.`goals` 
+ADD INDEX `tag_id_idx` (`tag_id` ASC);
+ALTER TABLE `simple_goals`.`goals` 
+ADD CONSTRAINT `tag_id`
+  FOREIGN KEY (`tag_id`)
+    REFERENCES `simple_goals`.`tags` (`tag_id`)
+      ON DELETE CASCADE
+        ON UPDATE CASCADE;
+        
