@@ -4,6 +4,7 @@
         <th>Date</th>
         <th>Goal</th>
         <th>Category</th>
+        <th>Tags</th>
         <th>Due Date</th>
       </tr>
     </thead>
@@ -13,6 +14,7 @@
         <td><%= goal.time_submitted %></td>
         <td><%= goal.goal %></td>
         <td><%= goal.category %></td>
+        <td><%= goal.tags %></td>
         <td><%= goal.due_date %></td>
         <td>
         <form method="POST" action="/complete/<%= goal.goal_id %>">

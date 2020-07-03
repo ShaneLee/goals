@@ -16,5 +16,7 @@ CREATE TABLE `simple_goals`.`goals` (
   `due_date` TIMESTAMP NULL,
   `complete` TINYINT NULL DEFAULT 0,
   `time_completed` TIMESTAMP NULL,
+  `tags` VARCHAR(150) NULL,
   PRIMARY KEY (`goal_id`));
+
 
