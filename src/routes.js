@@ -44,7 +44,7 @@ router.get('/goals', (req, res) => {
       return []
     }
     console.log('Getting data from database for /get_goals')
-    res.render('./pages/goals', { goals: rows })
+    res.render('./pages/goals', { goals: utils.dateFormatter(rows) })
   })
 })
 
@@ -57,7 +57,7 @@ router.get('/goals/:tag', (req, res) => {
       return []
     }
     console.log('Getting data from database for /get_goals')
-    res.render('./pages/goals', { goals: rows })
+    res.render('./pages/goals', { goals: utils.dateFormatter(rows) })
   })
 })
 
@@ -70,7 +70,7 @@ router.get('/week', (req, res) => {
       return []
     }
     console.log('Getting data from database for /get_goals')
-    res.render('./pages/goals', { goals: rows })
+    res.render('./pages/goals', { goals: utils.dateFormatter(rows) })
   })
 })
 router.get('/category', (req, res) => {
@@ -87,7 +87,7 @@ router.get('/completed_week', (req, res) => {
       return []
     }
     console.log('Getting data from database for /get_goals')
-    res.render('./pages/goals', { goals: rows })
+    res.render('./pages/goals', { goals: utils.dateFormatter(rows) })
   })
 })
 
@@ -100,7 +100,7 @@ router.get('/month', (req, res) => {
       return []
     }
     console.log('Getting data from database for /get_goals')
-    res.render('./pages/goals', { goals: rows })
+    res.render('./pages/goals', { goals: utils.dateFormatter(rows) })
   })
 })
 router.get('/category', (req, res) => {
@@ -117,7 +117,7 @@ router.get('/completed_month', (req, res) => {
       return []
     }
     console.log('Getting data from database for /get_goals')
-    res.render('./pages/goals', { goals: rows })
+    res.render('./pages/goals', { goals: utils.dateFormatter(rows) })
   })
 })
 
