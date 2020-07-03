@@ -4,6 +4,7 @@ require('dotenv').config()
 const passport = require('passport')
 const db = require('./database')
 const moment = require('moment')
+const utils = require('./utils')
 
 const con = db.getCon()
 
@@ -116,17 +117,50 @@ router.get('/category', (req, res) => {
 router.get('/test', (req, res) => {
 })
 
+const getGoalId = (goal, date) => {
+  const queryString = 'SELECT goal_id  FROM goals WHERE time_submitted = ? AND goal = ?'
+  return new Promise((resolve, reject) => {
+    con.query(queryString, [date, goal], (err, rows, fields) => {
+      if (err) {
+        console.log('Failed to query for /getGoalId: ' + err)
+        return []
+      }
+      resolve(rows)
+    })
+  })
+}
+
+const insertTags = (tags, goal_id) => {
+  const queryString = 'INSERT INTO tags \
+    (goal_id, tags) VALUES (?, ?)'
+  con.query(queryString, [goal_id, tags[0][0]], 
+    (err, results, field) => {
+    if (err) {
+      console.log('Failed to submit tags. ' + err)
+      return
+    }
+    const result ='Logged new goal ' + results
+    console.log(result)
+    return result
+    })
+}
+
 router.post('/submit_goal', (req, res) => {
   checkLoggedIn(req, res)
   const date = moment(req.body.dueDate, 'DD/MM/YYYY').format('YYYY-MM-DD  HH:mm:ss.000')
-  queryString = 'INSERT INTO goals (goal, category, due_date) VALUES (?, ?, ?)'
-  con.query(queryString, [req.body.goal, req.body.category, date], (err, results, field) => {
+  const tags = utils.tagsToArray(req.body.tags).map(x => [x])
+  queryString = 'INSERT INTO goals (goal, category, due_date) VALUES (?, ?, ?);'
+  con.query(queryString, [req.body.goal, req.body.category, date], 
+    (err, results, field) => {
     if (err) {
       console.log('Failed to submit goal. ' + err)
       return
     }
     const result ='Logged new goal ' + results
     console.log(result)
+  })
+  getGoalId(req.body.goal, date).then((goalId) => {
+    insertTags(tags, getGoalId(req.body.goal, date))
     return result
   })
   res.redirect('/')

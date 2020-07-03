@@ -23,8 +23,8 @@ CREATE TABLE `simple_goals`.`goals` (
 CREATE TABLE `simple_goals`.`tags` (
     `tag_id` INT NOT NULL AUTO_INCREMENT,
     `goal_id` INT NOT NULL,
-      `tag` VARCHAR(100) NULL,
-        PRIMARY KEY (`tag_id`));
+    `tag` VARCHAR(100) NULL,
+    PRIMARY KEY (`tag_id`));
 
 ALTER TABLE `simple_goals`.`tags` 
 ADD INDEX `goal_id_idx` (`goal_id` ASC);
