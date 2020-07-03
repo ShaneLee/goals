@@ -18,3 +18,8 @@ describe('Tags to array', () => {
   })
 })
 
+describe('Date formatter', () => {
+  it('should return an empty string when the date is not found', () => {
+    expect(utils.dateFormatter([{}])).toEqual([{'due_date': '', 'time_submitted': '', 'time_completed': ''}])
+  })
+})
