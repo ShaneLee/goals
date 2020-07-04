@@ -1,6 +1,8 @@
-<table class="table table-hover">
+<form name="update_many" method="POST" action="/update_many"> 
+  <table class="table table-hover">
     <thead>
       <tr>
+        <th></th>
         <th>Date</th>
         <th>Goal</th>
         <th>Category</th>
@@ -11,6 +13,7 @@
     <tbody id="goals_table">
       <% goals.forEach((goal) => {%>
       <tr>
+        <td><input type="checkbox" name="goal_id" value="<%= goal.goal_id %>"></td>
         <td><%= goal.time_submitted %></td>
         <td><%= goal.goal %></td>
         <td><%= goal.category %></td>
@@ -34,3 +37,9 @@
       <% }) %>
     </tbody>
   </table>
+  <button type="submit">UPDATE MANY</button>
+  <div class="form-label-group">
+    <input type="text" class="form-control" name="dueDate" placeholder="Due Date" id="datepicker"/>
+  </div>
+</form>
+
