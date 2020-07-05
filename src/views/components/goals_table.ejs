@@ -39,6 +39,11 @@
   <div class="form-label-group">
     <input type="button" onClick="many('delete_many')" value="DELETE SELECTED">
   </div>
+  <%if (goals && goals[0].complete === 1) { %>
+    <div class="form-label-group">
+      <input type="button" onClick="many('uncomplete_many')" value="UNCOMPLETE SELECTED">
+    </div>
+  <% } %>
 </form>
 
 <% goals.forEach((goal) => {%>
@@ -51,7 +56,7 @@
   const delete_goal = (id) => document.getElementById(`delete_form_${id}`).submit()
   const many = (action) => {
     const update_many_form = document.getElementById('update_many')
-    update_many_form.action = action 
+    update_many_form.action = '/' + action 
     update_many_form.submit()
   }
 </script>
