@@ -169,6 +169,10 @@ router.post('/delete_many', (req, res) => {
   db.deleteMany(req, res)
 })
 
+router.post('/uncomplete_many', (req, res) => {
+  db.uncompleteMany(req, res)
+})
+
 router.post('/complete/:goal_id', (req, res) => {
   checkLoggedIn(req, res)
   db.completeGoal(req.params.goal_id)

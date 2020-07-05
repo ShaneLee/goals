@@ -116,3 +116,15 @@ db.deleteMany = (req, res) => {
   })
   res.redirect('/goals')
 }
+
+db.uncompleteMany = (req, res) => {
+  const ids = req.body.goal_id
+  const queryString = 'UPDATE goals set complete = 0 WHERE goal_id in (?)'
+  con.query(queryString, [ids], (err, results, field) => {
+    if (err) {
+      console.log('Failed to uncomplete many. ' + err)
+      return
+    }
+  })
+  res.redirect('/goals')
+}
