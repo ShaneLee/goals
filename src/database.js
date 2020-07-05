@@ -104,3 +104,15 @@ db.completeMany = (req, res) => {
   })
   res.redirect('/goals')
 }
+
+db.deleteMany = (req, res) => {
+  const ids = req.body.goal_id
+  const queryString = 'DELETE from goals where goal_id in (?)'
+  con.query(queryString, [ids], (err, results, field) => {
+    if (err) {
+      console.log('Failed to delete many. ' + err)
+      return
+    }
+  })
+  res.redirect('/goals')
+}
