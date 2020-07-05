@@ -158,16 +158,11 @@ router.post('/submit_category', (req, res) => {
 })
 
 router.post('/update_many', (req, res) => {
-  const ids = req.body.goal_id
-  const date = utils.formatMySqlTimestamp(req.body.dueDate)
-  queryString = 'UPDATE goals set due_date = ? WHERE goal_id in (?)'
-  con.query(queryString, [date, ids], (err, results, field) => {
-    if (err) {
-      console.log('Failed to update many. ' + err)
-      return
-    }
-  })
-  res.redirect('/goals')
+  db.updateMany(req, res)
+})
+
+router.post('/complete_many', (req, res) => {
+  db.completeMany(req, res)
 })
 
 router.post('/complete/:goal_id', (req, res) => {

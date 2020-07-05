@@ -27,7 +27,6 @@ const deletePeriodQuery = (period) => {
 
 }
 
-
 const db = module.exports = {}
 
 db.getCon = () => {
@@ -79,4 +78,29 @@ db.completeGoal = (id) => {
     console.log('Completed goal' + results)
   })
   
+}
+
+db.updateMany = (req, res) => {
+  const ids = req.body.goal_id
+  const date = utils.formatMySqlTimestamp(req.body.dueDate)
+  queryString = 'UPDATE goals set due_date = ? WHERE goal_id in (?)'
+  con.query(queryString, [date, ids], (err, results, field) => {
+    if (err) {
+      console.log('Failed to update many. ' + err)
+      return
+    }
+  })
+  res.redirect('/goals')
+}
+
+db.completeMany = (req, res) => {
+  const ids = req.body.goal_id
+  queryString = 'UPDATE goals set complete = 1 WHERE goal_id in (?)'
+  con.query(queryString, [ids], (err, results, field) => {
+    if (err) {
+      console.log('Failed to complete many. ' + err)
+      return
+    }
+  })
+  res.redirect('/goals')
 }

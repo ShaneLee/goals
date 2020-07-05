@@ -1,4 +1,4 @@
-<form name="update_many" method="POST" action="/update_many">
+<form id="update_many" name="update_many" method="POST" action="/update_many">
   <table class="table table-hover">
     <thead>
       <tr>
@@ -33,6 +33,7 @@
   <div class="form-label-group">
     <input type="text" class="form-control" name="dueDate" placeholder="Due Date" id="datepicker"/>
   </div>
+  <input type="button" onClick="many('complete_many')" value="COMPLETE SELECTED">
 </form>
 
 <% goals.forEach((goal) => {%>
@@ -43,4 +44,9 @@
 <script>
   const complete_goal = (id) => document.getElementById(`complete_form_${id}`).submit()
   const delete_goal = (id) => document.getElementById(`delete_form_${id}`).submit()
+  const many = (action) => {
+    const update_many_form = document.getElementById('update_many')
+    update_many_form.action = action 
+    update_many_form.submit()
+  }
 </script>
