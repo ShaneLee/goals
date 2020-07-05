@@ -29,11 +29,16 @@
       <% }) %>
     </tbody>
   </table>
-  <button type="submit">UPDATE MANY</button>
+  <input type="button" onClick="many('update_many')" value="UPDATE SELECTED">
   <div class="form-label-group">
     <input type="text" class="form-control" name="dueDate" placeholder="Due Date" id="datepicker"/>
   </div>
-  <input type="button" onClick="many('complete_many')" value="COMPLETE SELECTED">
+  <div class="form-label-group">
+    <input type="button" onClick="many('complete_many')" value="COMPLETE SELECTED">
+  </div>
+  <div class="form-label-group">
+    <input type="button" onClick="many('delete_many')" value="DELETE SELECTED">
+  </div>
 </form>
 
 <% goals.forEach((goal) => {%>
