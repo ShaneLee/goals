@@ -24,13 +24,13 @@ describe('Date formatter', () => {
       'due_date': new Date('2020-07-04 00:00:00'),
       'time_submitted': new Date('2020-07-31 00:00:00'), 
       'time_completed': new Date('2020-07-09 00:00:00')}]))
-    .toEqual([{
+    .toMatchObject([{
       'due_date': 'Sat Jul 04 2020',
       'time_submitted': 'Fri Jul 31 2020',
       'time_completed': 'Thu Jul 09 2020'}])
   })
 
   it('should return an empty string when the date is not found', () => {
-    expect(utils.dateFormatter([{}])).toEqual([{'due_date': '', 'time_submitted': '', 'time_completed': ''}])
+    expect(utils.dateFormatter([{}])).toMatchObject([{'due_date': '', 'time_submitted': '', 'time_completed': ''}])
   })
 })

@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 const moment = require('moment')
+const utils = require('./utils')
 require('dotenv').config()
 
 const getDBConnection = (database) => {
@@ -29,8 +30,23 @@ const deletePeriodQuery = (period) => {
 
 const db = module.exports = {}
 
-db.getCon = () => {
-  return con
+db.getCon = () => con
+
+db.insertGoal = (goal) => {
+  const date = goal.dueDate ? utils.formatMySqlTimestamp(goal.dueDate) : goal.due_date
+  const recurring = goal.recurring_days ? goal.recurring_days : null
+  const tags = goal.tags.trim()
+  queryString = 'INSERT INTO goals (goal, category, due_date, tags, recurring_days) \
+                  VALUES (?, ?, ?, ?, ?)'
+  con.query(queryString, [goal.goal, goal.category, date, tags, recurring], 
+    (err, results, field) => {
+    if (err) {
+      console.log('Failed to submit goal. ' + err)
+      return
+    }
+    const result ='Logged new goal ' + results
+    console.log(result)
+  })
 }
 
 db.getCategories = () => {
@@ -68,7 +84,9 @@ db.deleteGoalsInPeriod = (period) => {
   
 }
 
-db.completeGoal = (id) => {
+db.completeGoal = (goal) => {
+  const id = goal.goal_id
+  const recurring = goal.recurring_days
   queryString = 'UPDATE goals set complete = 1, time_completed = ? WHERE goal_id = ?'
   con.query(queryString, [moment().format("YYYY-MM-DD HH:mm:ss"), id], (err, results, field) => {
     if (err) {
@@ -76,6 +94,9 @@ db.completeGoal = (id) => {
       return
     }
     console.log('Completed goal' + results)
+    if (recurring && recurring !== 'null') {
+      db.insertGoal(utils.plusDays(goal))
+    }
   })
   
 }

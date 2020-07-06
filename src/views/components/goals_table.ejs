@@ -20,7 +20,7 @@
         <td><%= goal.tags %></td>
         <td><%= goal.due_date %></td>
         <td>
-          <input type="button" onClick="complete_goal(<%= goal.goal_id %>)" value="✅">
+          <input type="button" onClick="complete_goal(<%= JSON.stringify(goal) %>)" value="✅">
         </td>
         <td>
           <input type="button" onClick="delete_goal(<%= goal.goal_id %>)" value="🗑️">
@@ -47,16 +47,30 @@
 </form>
 
 <% goals.forEach((goal) => {%>
-    <form id="complete_form_<%= goal.goal_id %>" method="POST" action="/complete/<%= goal.goal_id %>"></form>
+    <form id="complete_form_<%= goal.goal_id %>" method="POST" action="/complete/<%= goal %>"></form>
     <form id="delete_form_<%= goal.goal_id %>" method="POST" action="/delete/<%= goal.goal_id %>"></form>
 <% }) %>
 
 <script>
-  const complete_goal = (id) => document.getElementById(`complete_form_${id}`).submit()
+  const add_to_form = (form, goal, action) => {
+    form.style.display = 'none'
+    document.body.appendChild(form)
+    form.method = 'POST'
+    form.action = '/' + action
+    Object.entries(goal).map(([key, val]) => {
+      const input = document.createElement('input')
+      input.setAttribute('value', val)
+      input.setAttribute('name', key)
+      form.appendChild(input)
+    })
+    return form
+  }
+  const goal_form = (goal, action) => add_to_form(document.createElement('form'), goal, action).submit()
+  const complete_goal = (goal) => goal_form(goal, 'complete')
   const delete_goal = (id) => document.getElementById(`delete_form_${id}`).submit()
   const many = (action) => {
     const update_many_form = document.getElementById('update_many')
-    update_many_form.action = '/' + action 
+    update_many_form.action = '/' + action
     update_many_form.submit()
   }
 </script>
