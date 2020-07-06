@@ -128,18 +128,7 @@ router.get('/category', (req, res) => {
 
 router.post('/submit_goal', (req, res) => {
   checkLoggedIn(req, res)
-  const date = utils.formatMySqlTimestamp(req.body.dueDate)
-  const tags = req.body.tags.trim()
-  queryString = 'INSERT INTO goals (goal, category, due_date, tags) VALUES (?, ?, ?, ?)'
-  con.query(queryString, [req.body.goal, req.body.category, date, tags], 
-    (err, results, field) => {
-    if (err) {
-      console.log('Failed to submit goal. ' + err)
-      return
-    }
-    const result ='Logged new goal ' + results
-    console.log(result)
-  })
+  db.insertGoal(utils.reqToGoal(req))
   res.redirect('/')
 })
 
@@ -173,9 +162,9 @@ router.post('/uncomplete_many', (req, res) => {
   db.uncompleteMany(req, res)
 })
 
-router.post('/complete/:goal_id', (req, res) => {
+router.post('/complete', (req, res) => {
   checkLoggedIn(req, res)
-  db.completeGoal(req.params.goal_id)
+  db.completeGoal(req.body)
   res.redirect('/goals')
 })
 
