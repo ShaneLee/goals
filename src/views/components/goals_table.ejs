@@ -39,7 +39,7 @@
   <div class="form-label-group">
     <input type="button" onClick="many('delete_many')" value="DELETE SELECTED">
   </div>
-  <%if (goals && goals[0].complete === 1) { %>
+  <%if (goals && goals[0] &&  goals[0].complete === 1) { %>
     <div class="form-label-group">
       <input type="button" onClick="many('uncomplete_many')" value="UNCOMPLETE SELECTED">
     </div>
