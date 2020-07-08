@@ -17,6 +17,7 @@ CREATE TABLE `simple_goals`.`goals` (
   `complete` TINYINT NULL DEFAULT 0,
   `time_completed` TIMESTAMP NULL,
   `tags` VARCHAR(150) NULL,
+  `recurring_days` INT NULL,
   PRIMARY KEY (`goal_id`));
 
 
